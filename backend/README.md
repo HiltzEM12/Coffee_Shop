@@ -71,7 +71,8 @@ The `--reload` flag will detect file changes and restart the server automaticall
 2. Select a unique tenant domain
     - roofuseat.us.auth0.com
 3. Create a new, single page web application
-    - CoffeeShop
+    - Name: CoffeeShop
+    - ClientID: dJReaIrxbUbm0kFRliVy0NJsijlKVS0f
 4. Create a new API
     - Name: coffee
     - Identifier: coffee
