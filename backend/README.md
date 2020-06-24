@@ -69,8 +69,12 @@ The `--reload` flag will detect file changes and restart the server automaticall
 
 1. Create a new Auth0 Account
 2. Select a unique tenant domain
+    - roofuseat.us.auth0.com
 3. Create a new, single page web application
+    - CoffeeShop
 4. Create a new API
+    - Name: coffee
+    - Identifier: coffee
     - in API Settings:
         - Enable RBAC
         - Enable Add Permissions in the Access Token
@@ -82,10 +86,13 @@ The `--reload` flag will detect file changes and restart the server automaticall
 6. Create new roles for:
     - Barista
         - can `get:drinks-detail`
-    - Manager
+    - Manager 
         - can perform all actions
 7. Test your endpoints with [Postman](https://getpostman.com). 
     - Register 2 users - assign the Barista role to one and Manager role to the other.
+         - Not ideal for an actual API, but here are the test users:
+            - barista@test.com 1234asdfQWER
+            - manager@test.com 1234asdfQWER
     - Sign into each account and make note of the JWT.
     - Import the postman collection `./starter_code/backend/udacity-fsnd-udaspicelatte.postman_collection.json`
     - Right-clicking the collection folder for barista and manager, navigate to the authorization tab, and including the JWT in the token field (you should have noted these JWTs).
@@ -98,3 +105,20 @@ There are `@TODO` comments throughout the `./backend/src`. We recommend tackling
 
 1. `./src/auth/auth.py`
 2. `./src/api.py`
+
+### Notes
+To get the jwt use 
+https://{{YOUR_DOMAIN}}/authorize?audience={{API_IDENTIFIER}}&response_type=token&client_id={{YOUR_CLIENT_ID}}&
+redirect_uri={{YOUR_CALLBACK_URI}}
+For this project use: https://roofuseat.us.auth0.com/authorize?audience=coffee&response_type=token&client_id=dJReaIrxbUbm0kFRliVy0NJsijlKVS0f&redirect_uri=https://localhost:8100/login-results
+Go to that url, login, and retrive the jwt from the url after login.
+Use this in a private browser session to prevent auto sign in
+
+Clock is not an attribute of the time module.  Error in sqlalchemy.  To fix change the following:
+in backend\env\Lib\site-packages\sqlalchemy\util\compat.py
+replace time_func = time.clock
+with time_func = time.perf_counter
+
+Barista: https://localhost:8100/login-results#access_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Im5abkRKUkhQUmhMZnY0US13Y3VyMyJ9.eyJpc3MiOiJodHRwczovL3Jvb2Z1c2VhdC51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWVmMzhiM2U3Nzk3YzEwMDEzNzAyMTNkIiwiYXVkIjoiY29mZmVlIiwiaWF0IjoxNTkzMDE5NjA1LCJleHAiOjE1OTMwMjY4MDUsImF6cCI6ImRKUmVhSXJ4YlVibTBrRlJsaVZ5ME5Kc2lqbEtWUzBmIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6ZHJpbmtzLWRldGFpbCJdfQ.IQHWaxSZy4bXI4VNp54EwWT2XcpTctXQtoT2de-aK6VxO5IZCy4TKzIl3R30IWW4pk3SiR6spWta-3chl_YjWw5Qp3WLmskwj5sXn_4mkL9Bqu3UkVRE-LWfmU3-icX7x5Fpt3_4_mqXoaqV5J3xPCUNPhI6MUP9KGB0kZH3OqRMPhnzu15EfdNKAkgOpd77_jZiu0ScnIJPrqIPBZXG1SIdxH2BmUP_Jwlr0u_rtNJ6dFKBTkXk_cM7S1lLDyjAQqf2iBCqJaTGsDP-scMgY4Y4xcnDpPHMaD6uGKGDdVUg6CKH9qHWmVVLtDo9Q2Fo2h8sThbyFeqGRTG9VlkqVg&expires_in=7200&token_type=Bearer
+
+Manager: https://localhost:8100/login-results#access_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Im5abkRKUkhQUmhMZnY0US13Y3VyMyJ9.eyJpc3MiOiJodHRwczovL3Jvb2Z1c2VhdC51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWVmMzhiNjI3Nzk3YzEwMDEzNzAyMTNmIiwiYXVkIjoiY29mZmVlIiwiaWF0IjoxNTkzMDE5NjkyLCJleHAiOjE1OTMwMjY4OTIsImF6cCI6ImRKUmVhSXJ4YlVibTBrRlJsaVZ5ME5Kc2lqbEtWUzBmIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6ZHJpbmtzIiwiZ2V0OmRyaW5rcy1kZXRhaWwiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.uZ3JxU8_7bOrwYrjQwCL2nl47DmS8VqxW-Uv5HSsCGRcp77OqxeXyUkyuyywNtm0Mpt7bbA9LDh4HSQnjESCnuoHvtOr-gTT02ahKowix-c3IQlFQIwUNt8drN2XE_5i-PMbmI8m_yr7fq2twyMjURyM_B0cf_iTtrIdAP8AfRB6R4YmQQsDeIlriLnQnsqx1lJGMibt7Nc488_CatBUb5L2wuK6_j9pPjeOuMF1iAfc8ASQtDSdqgL5A71-ilxGDZdX2mL0tSCnmiQDCo_HPwq5LXJe_FagERfI2wCjHtWOiOTSvLDIoa79AM-icIr6gF6vbLL2pwI1bMTP-Zk83g&expires_in=7200&token_type=Bearer
