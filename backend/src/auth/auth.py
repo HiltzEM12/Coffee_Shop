@@ -112,7 +112,7 @@ def verify_decode_jwt(token):
                 'n': key['n'],
                 'e': key['e']
             }
-    if rsa_key: # continue if rsa key has something in it
+    if rsa_key: # continue if rsa key has something there
         try: # get the payload
             payload = jwt.decode(
                 token,
