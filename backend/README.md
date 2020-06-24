@@ -108,7 +108,7 @@ There are `@TODO` comments throughout the `./backend/src`. We recommend tackling
 2. `./src/api.py`
 
 ### Notes
-To get the jwt use 
+To get the jwt use
 https://{{YOUR_DOMAIN}}/authorize?audience={{API_IDENTIFIER}}&response_type=token&client_id={{YOUR_CLIENT_ID}}&
 redirect_uri={{YOUR_CALLBACK_URI}}
 For this project use: https://roofuseat.us.auth0.com/authorize?audience=coffee&response_type=token&client_id=dJReaIrxbUbm0kFRliVy0NJsijlKVS0f&redirect_uri=https://localhost:8100/login-results
